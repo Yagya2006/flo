@@ -4,7 +4,7 @@ const Transaction = require("../models/Transaction");
 
 exports.transfer = async (req, res) => {
   try {
-    const { recipientEmail, amount } = req.body;
+    const { recipientEmail, amount ,note} = req.body;
 
     if (!amount || amount <= 0) {
       return res.status(400).json({ message: "Invalid amount" });
@@ -49,6 +49,7 @@ exports.transfer = async (req, res) => {
       type: "transfer",
       amount,
       balanceAfter: senderWallet.balance,
+      note: note || "",
     });
 
     const recipientTransaction = await Transaction.create({
@@ -58,6 +59,7 @@ exports.transfer = async (req, res) => {
       type: "transfer",
       amount,
       balanceAfter: recipientWallet.balance,
+      note: note || "",
     });
 
     res.status(201).json({

@@ -1,30 +1,36 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DashboardLayout from '../layouts/DashboardLayout';
 import { useAuth } from '../context/AuthContext';
 import api from '../api/index.js';
+import AddMoneyModal from '../components/AddMoneyModal';
 import { ArrowDownLeft, ArrowUpRight, Send, Plus } from 'lucide-react';
+
 
 const Dashboard = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [wallet, setWallet] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showAddMoney, setShowAddMoney] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const walletRes = await api.get('/wallet');
-        const txRes = await api.get('/wallet/transactions');
-        setWallet(walletRes.data);
-        setTransactions(txRes.data.slice(0, 5));
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+  const fetchData = async () => {
+  try {
+    const walletRes = await api.get('/wallet');
+    const txRes = await api.get('/wallet/transactions');
+    setWallet(walletRes.data);
+    setTransactions(txRes.data.slice(0, 5));
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+};
+
+useEffect(() => {
+  fetchData();
+}, []);
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-GB', {
@@ -57,14 +63,14 @@ const Dashboard = () => {
         </h2>
 
         <div className="flex gap-3 mt-6">
-          <button className="flex items-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] px-5 py-2.5 rounded-xl font-medium transition cursor-pointer">
+          <button onClick={() => setShowAddMoney(true)} className="flex items-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] px-5 py-2.5 rounded-xl font-medium transition cursor-pointer">
             <Plus size={18} />
             Add money
           </button>
-          <button className="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-xl font-medium transition cursor-pointer">
-            <Send size={18} />
-            Send
-          </button>
+          <button onClick={() => navigate('/send')} className="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-xl font-medium transition cursor-pointer">
+  <Send size={18} />
+  Send
+</button>
         </div>
       </div>
 
@@ -103,6 +109,12 @@ const Dashboard = () => {
           </div>
         )}
       </div>
+      {showAddMoney && (
+  <AddMoneyModal
+    onClose={() => setShowAddMoney(false)}
+    onSuccess={fetchData}
+  />
+)}
     </DashboardLayout>
   );
 };
