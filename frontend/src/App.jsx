@@ -5,6 +5,7 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Transactions from './pages/Transactions';
 import Send from './pages/Send';
+import Savings from './pages/Savings';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -28,6 +29,7 @@ function App() {
         <Route path="/transactions" element={<ProtectedRoute><Transactions /></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/login" />} />
       <Route path="/send" element={<ProtectedRoute><Send /></ProtectedRoute>} />
+      <Route path="/savings" element={<ProtectedRoute><Savings /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );
