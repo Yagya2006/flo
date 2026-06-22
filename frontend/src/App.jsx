@@ -7,6 +7,7 @@ import Transactions from './pages/Transactions';
 import Send from './pages/Send';
 import Savings from './pages/Savings';
 import Profile from './pages/Profile';
+import Analytics from './pages/Analytics';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -32,6 +33,7 @@ function App() {
       <Route path="/send" element={<ProtectedRoute><Send /></ProtectedRoute>} />
       <Route path="/savings" element={<ProtectedRoute><Savings /></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+      <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );

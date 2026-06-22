@@ -1,12 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LayoutDashboard, ArrowLeftRight, PiggyBank, User, LogOut } from 'lucide-react';
-
+import { LayoutDashboard, ArrowLeftRight, PiggyBank, User, LogOut, BarChart3 } from 'lucide-react';
 const navItems = [
   { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
   { name: 'Transactions', path: '/transactions', icon: ArrowLeftRight },
   { name: 'Savings', path: '/savings', icon: PiggyBank },
   { name: 'Profile', path: '/profile', icon: User },
+  { name: 'Analytics', path: '/analytics', icon: BarChart3 },
 ];
 
 const DashboardLayout = ({ children }) => {
