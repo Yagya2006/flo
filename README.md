@@ -1,6 +1,6 @@
 # Flo
 
-A Monzo-inspired digital wallet app built with the MERN stack. Flo lets users hold a balance, send money to other users, track spending, and set savings goals — all wrapped in a clean, card-based UI.
+A digital wallet app built with the MERN stack. Flo lets users hold a balance, send money to other users, track spending, and set savings goals — all wrapped in a clean, card-based UI.
 
 Built as a portfolio project to demonstrate full-stack engineering skills for fintech software engineering internship applications.
 
