@@ -30,10 +30,10 @@ function App() {
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/transactions" element={<ProtectedRoute><Transactions /></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/login" />} />
-      <Route path="/send" element={<ProtectedRoute><Send /></ProtectedRoute>} />
-      <Route path="/savings" element={<ProtectedRoute><Savings /></ProtectedRoute>} />
-      <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-      <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
+        <Route path="/send" element={<ProtectedRoute><Send /></ProtectedRoute>} />
+        <Route path="/savings" element={<ProtectedRoute><Savings /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );
