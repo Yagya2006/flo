@@ -1,5 +1,5 @@
 # Flo
-
+🔗 **Live demo:** [flo-gamma-two.vercel.app](https://flo-gamma-two.vercel.app/)
 A digital wallet app built with the MERN stack. Flo lets users hold a balance, send money to other users, track spending, and set savings goals — all wrapped in a clean, card-based UI.
 
 Built as a portfolio project to demonstrate full-stack engineering skills for fintech software engineering internship applications.
@@ -70,6 +70,14 @@ Three core collections:
 
 Wallets and Users are linked by reference (`ObjectId`), not embedding — keeping the two concerns independent and queryable on their own.
 
+## Live deployment
+
+- **Frontend** — deployed on Vercel
+- **Backend** — deployed on Railway
+- **Database** — MongoDB Atlas
+
+Note: the Railway free tier may spin down after periods of inactivity, so the first request after a while might take a few seconds to respond while it spins back up.
+
 ## Known limitations
 
 - **Transfer atomicity** — transfers update two wallet documents sequentially rather than within a MongoDB session/transaction. In production this would use `mongoose.startSession()` to guarantee both updates succeed or roll back together.
@@ -115,7 +123,6 @@ The app will be available at `http://localhost:5173`, with the API running on `h
 - [ ] Automated test coverage (Jest)
 - [ ] MongoDB session-based transaction atomicity for transfers
 - [ ] Rate limiting and input sanitisation
-- [ ] Deployment (Railway + Vercel)
 - [ ] Dark mode
 
 ## Author
