@@ -33,3 +33,54 @@ describe("Auth endpoints", () => {
   });
 
 });
+
+describe("Login endpoint", () => {
+
+  beforeAll(async () => {
+    await request(app)
+      .post("/api/auth/register")
+      .send({
+        name: "Login Test User",
+        email: "logintest@flo.com",
+        password: "correctpassword",
+      });
+  });
+
+  test("should login successfully with correct credentials", async () => {
+    const res = await request(app)
+      .post("/api/auth/login")
+      .send({
+        email: "logintest@flo.com",
+        password: "correctpassword",
+      });
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toHaveProperty("token");
+    expect(res.body.user.email).toBe("logintest@flo.com");
+  });
+
+  test("should reject login with wrong password", async () => {
+    const res = await request(app)
+      .post("/api/auth/login")
+      .send({
+        email: "logintest@flo.com",
+        password: "wrongpassword",
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.message).toBe("Invalid credentials");
+  });
+
+  test("should reject login with non-existent email", async () => {
+    const res = await request(app)
+      .post("/api/auth/login")
+      .send({
+        email: "doesnotexist@flo.com",
+        password: "anypassword",
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.message).toBe("Invalid credentials");
+  });
+
+});
