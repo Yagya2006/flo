@@ -27,6 +27,23 @@ const Login = () => {
       setLoading(false);
     }
   };
+  const handleDemoLogin = async () => {
+  setError('');
+  setLoading(true);
+
+  try {
+    const res = await api.post('/auth/login', {
+      email: 'demo@flo.com',
+      password: 'demo1234',
+    });
+    login(res.data.user, res.data.token);
+    navigate('/dashboard');
+  } catch (err) {
+    setError('Demo login failed. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#F4F6FA] flex items-center justify-center p-4">
@@ -81,6 +98,19 @@ const Login = () => {
               {loading ? 'Signing in...' : 'Sign in'}
             </button>
           </form>
+          <div className="flex items-center gap-3 my-5">
+  <div className="flex-1 h-px bg-[#E5E7EB]" />
+  <span className="text-xs text-[#9CA3AF] font-medium">OR</span>
+  <div className="flex-1 h-px bg-[#E5E7EB]" />
+</div>
+
+<button
+  onClick={handleDemoLogin}
+  disabled={loading}
+  className="w-full bg-[#F4F6FA] hover:bg-[#E5E7EB] disabled:opacity-50 text-[#111827] font-semibold py-3 rounded-xl transition cursor-pointer"
+>
+  Try the demo
+</button>
 
           <p className="text-center text-sm text-[#6B7280] mt-6">
             Don't have an account?{' '}
